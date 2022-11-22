@@ -11,8 +11,10 @@
             <input id="rullinput" v-model="antal">
             <button>Rulla</button>
         </form>
+        <h3 v-if="kvot">andel</h1>
+        <div  v-if="kvot"><span style="margin-right: 10px" v-for="(item, index) in kvot">{{index+3}}: {{item}}</span></div>
         <h3 v-if="snitt">Snitt {{snitt}}</h1>
-        <div><span v-for="summa in res">{{summa}}, </span></div>
+        <div  v-if="snitt"><span v-for="summa in res">{{summa}}, </div></div>
     </main>
 </div>
 
@@ -25,18 +27,24 @@
             return {
                 antal: 10000,
                 res: [],
-                snitt: null
+                snitt: null,
+                kvot: null
             }
         },
         methods: {
             rulla() {
                 this.res = [];
+                this.kvot = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
                 for (let i = 0; i < this.antal; i++) {
                     let arr = [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
                     let val = arr.sort().slice(1).reduce((p, c) => p + c);
+                    this.kvot[val-3]=this.kvot[val-3]+1;
                     this.res.push(val);
                 }
                 this.snitt = this.res.reduce((p, c) => p + c) / this.res.length;
+                this.kvot = this.kvot.map(i=> i * 100 / this.antal +"%");
+
             }
 
         }
