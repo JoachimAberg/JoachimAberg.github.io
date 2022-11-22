@@ -1,0 +1,47 @@
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+</head>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+    <main class="container">
+        <h1>4d6d1</h1>
+        <form @submit.prevent="rulla">
+            <label for="rullinput">Antal rull </label>
+            <input id="rullinput" v-model="antal">
+            <button>Rulla</button>
+        </form>
+        <h3 v-if="snitt">Snitt {{snitt}}</h1>
+        <div><span v-for="summa in res">{{summa}}, </span></div>
+    </main>
+</div>
+
+
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                antal: 10000,
+                res: [],
+                snitt: null
+            }
+        },
+        methods: {
+            rulla() {
+                this.res = [];
+                for (let i = 0; i < 100000; i++) {
+                    let arr = [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
+                    let val = arr.sort().slice(1).reduce((p, c) => p + c);
+                    this.res.push(val);
+                }
+                this.snitt = this.res.reduce((p, c) => p + c) / this.res.length;
+            }
+
+        }
+
+    }).mount('#app')
+
+
+</script>
