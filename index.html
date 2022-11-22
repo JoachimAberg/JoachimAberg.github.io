@@ -31,7 +31,7 @@
         methods: {
             rulla() {
                 this.res = [];
-                for (let i = 0; i < 100000; i++) {
+                for (let i = 0; i < this.antal; i++) {
                     let arr = [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
                     let val = arr.sort().slice(1).reduce((p, c) => p + c);
                     this.res.push(val);
