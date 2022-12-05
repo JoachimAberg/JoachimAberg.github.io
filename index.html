@@ -5,16 +5,8 @@
 
 <div id="app">
     <main class="container">
-        <h1>4d6d1</h1>
-        <form @submit.prevent="rulla">
-            <label for="rullinput">Antal rull </label>
-            <input id="rullinput" v-model="antal">
-            <button>Rulla</button>
-        </form>
-        <h3 v-if="kvot">andel</h1>
-        <div  v-if="kvot"><span style="margin-right: 10px" v-for="(item, index) in kvot">{{index+3}}: {{item}}</span></div>
-        <h3 v-if="snitt">Snitt {{snitt}}</h1>
-        <div  v-if="snitt"><span v-for="summa in res">{{summa}}, </div></div>
+        <h1>Hallå</h1>
+        <div>Här var det tomt</div>
     </main>
 </div>
 
@@ -28,13 +20,19 @@
                 antal: 10000,
                 res: [],
                 snitt: null,
-                kvot: null
+                kvot: null,
+                loading:""
             }
         },
         methods: {
             rulla() {
                 this.res = [];
                 this.kvot = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                nextTick(() => {
+                    this.loading = "true"
+                    // access updated DOM
+                })
+                
 
                 for (let i = 0; i < this.antal; i++) {
                     let arr = [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
@@ -44,6 +42,7 @@
                 }
                 this.snitt = this.res.reduce((p, c) => p + c) / this.res.length;
                 this.kvot = this.kvot.map(i=> i * 100 / this.antal +"%");
+                this.loading = ""
 
             }
 
