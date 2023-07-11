@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build && copy CNAME ./dist",
+    "build": "vite build && cp CNAME ./dist",
     "serve": "vite preview",
     "deploy": "echo 'www.joachimaberg.se' > ./dist/CNAME && gh-pages -d dist"
   },
