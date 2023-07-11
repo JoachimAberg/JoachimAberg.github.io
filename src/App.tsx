@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import type { Component } from 'solid-js';
 
-function App() {
+import logo from './logo.svg';
+import styles from './App.module.css';
+
+const App: Component = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div class={styles.App}>
+      <header class={styles.header}>
+        <img src={logo} class={styles.logo} alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
-          className="App-link"
-          href="https://reactjs.org"
+          class={styles.link}
+          href="https://github.com/solidjs/solid"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn Solid
         </a>
       </header>
     </div>
   );
-}
+};
 
 export default App;
