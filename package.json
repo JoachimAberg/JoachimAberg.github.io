@@ -6,9 +6,9 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && copy CNAME ./dist",
     "serve": "vite preview",
-    "deploy": "echo 'www.joachimaberg.se' > ./build/CNAME && gh-pages -d build"
+    "deploy": "echo 'www.joachimaberg.se' > ./dist/CNAME && gh-pages -d dist"
   },
   "license": "MIT",
   "devDependencies": {
