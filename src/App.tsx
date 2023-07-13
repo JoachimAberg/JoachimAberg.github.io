@@ -10,7 +10,8 @@ const App: Component = () => {
 
   return (
     <div class={styles.main}>
-      <h1>Hallå {params.namn??'Världen'}</h1>
+      <h1>Hallå {params.namn??'Världen'} <span class={styles.wave}>👋</span>
+</h1>
     </div>
   );
 };
