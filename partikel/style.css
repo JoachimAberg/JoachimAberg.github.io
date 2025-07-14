@@ -1,0 +1,57 @@
+#canvas1 {
+  position: absolute;
+}
+.controls {
+  z-index: 100;
+  width: 200px;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  height: 100%;
+  position: absolute;
+  background: #888888;
+  padding: 0 0.5rem;
+  > *:first-child {
+    margin-top: 10px;
+  }
+  button {
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    input {
+      padding: 4px;
+      border-radius: 4px;
+    }
+  }
+}
+img {
+  display: none;
+}
+
+body {
+  background: #444444;
+  height: 100vh;
+  margin: 0;
+}
+* {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+kbd {
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 0.2), 0 2px 0 0 rgb(255 255 255 / 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
