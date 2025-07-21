@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hallå där</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="get-elements.js"></script>
+    <script type="module" src="particle.js"></script>
+    <script type="module" src="particle-manager.js"></script>
+  </head>
+  <body>
+    <div id="desktop">
+      <div class="controls">
+        <button id="gravity-btn" class="">Byt läge <kbd>z</kbd></button>
+        <button id="changeimg-btn" class="">Byt Bild <kbd>x</kbd></button>
+        <button id="change-resolution-btn" class="">
+          Byt Upplösning (nu=3) <kbd>c</kbd>
+        </button>
+        <button id="reset-position-btn" class="">
+          Nollställ position <kbd>v</kbd>
+        </button>
+        <div class="input-wrapper">
+          <label for="convergion-speed" id="convergion-speed-label"
+            >Grupperinghastighet (100)</label
+          >
+          <input
+            type="range"
+            name="convergion-speed"
+            id="convergion-speed"
+            value="100"
+            max="500"
+            min="0"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="mouse-click-force" id="mouse-click-force-label"
+            >Klick-kraft (100)</label
+          >
+          <input
+            type="range"
+            name="mouse-click-force"
+            id="mouse-click-force"
+            value="10"
+            max="100"
+            min="1"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="gravy" id="gravy-label">Gravitation y (100)</label>
+          <input
+            type="range"
+            name="gravy"
+            id="gravy"
+            value="100"
+            min="-200"
+            max="200"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="gravx" id="gravx-label">Gravitation x (0)</label>
+          <input
+            type="range"
+            name="gravx"
+            id="gravx"
+            value="0"
+            min="-200"
+            max="200"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="friction" id="friction-label">Friktion (10)</label>
+          <input
+            type="range"
+            name="friction"
+            id="friction"
+            value="10"
+            min="0"
+            max="100"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="inertia" id="inertia-label">Tröghet (10)</label>
+          <input
+            type="range"
+            name="inertia"
+            id="inertia"
+            value="10"
+            min="0"
+            max="100"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="bounce-loss" id="bounce-loss-label"
+            >Studsförlust (20)</label
+          >
+          <input
+            type="range"
+            name="bounce-loss"
+            id="bounce-loss"
+            value="20"
+            min="0"
+            max="100"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="bounce-scatter" id="bounce-scatter-label"
+            >X-randomisering golv (100)</label
+          >
+          <input
+            type="range"
+            name="bounce-scatter"
+            id="bounce-scatter"
+            value="100"
+            min="0"
+            max="200"
+            step="1"
+          />
+        </div>
+        <div id="particles-amt"></div>
+        <div><span>Fps:</span><span id="fps-counter"></span></div>
+      </div>
+      <canvas id="canvas1"></canvas>
+      <img src="images/semester-jimmie3.png" id="image1" />
+      <img src="images/Chadmaton.png" id="image2" />
+      <img src="images/Cletus.png" id="image3" />
+      <img src="images/giorgos.png" id="image4" />
+      <img src="images/Gunther.png" id="image5" />
+      <img src="images/Jimmie.png" id="image6" />
+      <img src="images/LilBerg.png" id="image7" />
+      <img src="images/LilOma.png" id="image8" />
+      <img src="images/Ove.png" id="image9" />
+      <img src="images/abdulla2.png" id="image10" />
+      <img src="images/Soeren.png" id="image11" />
+      <img src="images/Urban.png" id="image12" />
+    </div>
+    <div id="mobile" class="d-none">Inget mobilstöd</div>
+  </body>
+</html>
