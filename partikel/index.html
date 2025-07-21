@@ -18,8 +18,8 @@
     <script type="module" src="particle-manager.js"></script>
   </head>
   <body>
-    <div id="desktop">
-      <div class="controls">
+    <div>
+      <div class="controls" id="controls">
         <button id="gravity-btn" class="">Byt läge <kbd>Z</kbd></button>
         <button id="changeimg-btn" class="">Byt Bild <kbd>X</kbd></button>
         <button id="change-resolution-btn" class="">
@@ -97,7 +97,7 @@
             name="mouse-click-growth"
             id="mouse-click-growth"
             value="0"
-            max="100"
+            max="500"
             min="1"
             step="1"
           />
@@ -176,7 +176,7 @@
           ><span id="fps-counter"></span>
         </div>
       </div>
-      <canvas id="canvas1"></canvas>
+      <canvas id="canvas"></canvas>
       <img src="images/semester-jimmie3.png" id="image1" />
       <img src="images/Chadmaton.png" id="image2" />
       <img src="images/Cletus.png" id="image3" />
@@ -190,6 +190,6 @@
       <img src="images/Soeren.png" id="image11" />
       <img src="images/Urban.png" id="image12" />
     </div>
-    <div id="mobile" class="d-none">Inget mobilstöd</div>
+    <div id="mobile" class="d-none">Inget mobilstöd. Ta dig till en dator</div>
   </body>
 </html>

@@ -1,4 +1,6 @@
-export const canvas = document.getElementById("canvas1");
+export const canvas = document.getElementById("canvas");
+export const controls = document.getElementById("controls");
+
 export const gravityBtn = document.getElementById("gravity-btn");
 export const changeImgBtn = document.getElementById("changeimg-btn");
 export const changeResolutionBtn = document.getElementById(

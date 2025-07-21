@@ -234,7 +234,8 @@ window.addEventListener("load", function () {
   }
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (isMobile) {
-    getElements.desktop.classList.add("d-none");
+    getElements.canvas.classList.add("d-none");
+    getElements.controls.classList.add("d-none");
     getElements.mobile.classList.remove("d-none");
   }
 });

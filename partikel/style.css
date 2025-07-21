@@ -60,3 +60,10 @@ kbd {
 hr.w80 {
   width: 100%;
 }
+.d-none {
+  display: none;
+}
+#mobile {
+  padding: 0.5rem;
+  color: whitesmoke;
+}
