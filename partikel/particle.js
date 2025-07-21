@@ -119,6 +119,12 @@ export class Particle {
     this.y += this.vy;
   }
   handleConvergeToOrigin() {
+    if (this.x + this.vx < 5 || this.x > this.particlesManager.width - 5) {
+      this.vx = -this.vx;
+    }
+    if (this.y + this.vy < 5 || this.y > this.particlesManager.height - 5) {
+      this.vy = -this.vy;
+    }
     this.calculateforce();
     this.x += this.vx + (this.originX - this.x) * this.particlesManager.ease;
     this.y += this.vy + (this.originY - this.y) * this.particlesManager.ease;
