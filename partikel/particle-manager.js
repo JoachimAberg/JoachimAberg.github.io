@@ -1,6 +1,5 @@
 import { Particle } from "./particle.js";
 import * as getElements from "./get-elements.js";
-
 export class ParticlesManager {
   constructor(
     width,
@@ -32,6 +31,7 @@ export class ParticlesManager {
     this.images = this.images;
     this.particlesAmtElement = getElements.particlesAmtElement;
     this.gap = 3;
+    this.velocityRendering = false;
     this.mouse = {
       radius: 0,
       x: Number.MAX_SAFE_INTEGER,
@@ -42,10 +42,14 @@ export class ParticlesManager {
       this.mouse.x = event.x;
       this.mouse.y = event.y;
     });
+    this.maximumVx = 0;
+    this.maximumVy = 0;
   }
   init(context) {
     this.x = this.width * 0.5 - this.images[this.imageIndex].width * 0.5;
     this.y = this.height * 0.5 - this.images[this.imageIndex].height * 0.5;
+    this.maximumVx = 0;
+    this.maximumVy = 0;
     context.drawImage(this.images[this.imageIndex], this.x, this.y);
     //clamped array, r,g,b,a därav 4 på index
     this.particlesArray = [];
@@ -69,7 +73,9 @@ export class ParticlesManager {
   }
 
   draw(context) {
-    this.particlesArray.forEach((p) => p.draw(context));
+    for (let index = 0; index < this.particlesArray.length; index++) {
+      this.particlesArray[index].draw(context);
+    }
     context.beginPath();
     context.arc(this.mouse.x, this.mouse.y, this.mouse.radius, 0, 2 * Math.PI);
     context.lineWidth = Math.max(2, this.mouse.radius / 10);
@@ -78,7 +84,32 @@ export class ParticlesManager {
   }
 
   update() {
-    this.particlesArray.forEach((p) => p.update());
+    for (let index = 0; index < this.particlesArray.length; index++) {
+      const currentParticle = this.particlesArray[index];
+      currentParticle.update();
+      this.maximumVy = Math.max(this.maximumVy, Math.abs(currentParticle.vy));
+      this.maximumVx = Math.max(this.maximumVx, Math.abs(currentParticle.vx));
+      if (this.velocityRendering) {
+        const currentColorY =
+          this.maximumVy == 0
+            ? 0
+            : Math.max(-1, Math.min(currentParticle.vy / this.maximumVy, 1)) *
+              127;
+        const currentColorX =
+          this.maximumVy == 0
+            ? 0
+            : Math.max(-1, Math.min(currentParticle.vx / this.maximumVx, 1)) *
+              127;
+        currentParticle.velocityColor =
+          "rgb(" +
+          (127 - currentColorY) +
+          "," +
+          (127 + currentColorY) +
+          "," +
+          (127 + currentColorX) +
+          ")";
+      }
+    }
   }
   toggleGravity() {
     this.gravityEnabled = !this.gravityEnabled;
@@ -86,5 +117,10 @@ export class ParticlesManager {
   }
   resetPosition() {
     this.particlesArray.forEach((p) => p.resetPosition());
+  }
+  changeStyle() {
+    this.velocityRendering = !this.velocityRendering;
+    this.maximumVx = 0;
+    this.maximumVy = 0;
   }
 }

@@ -6,6 +6,7 @@ export class Particle {
     this.originX = Math.floor(x);
     this.originY = Math.floor(y);
     this.color = color;
+    this.velocityColor = "";
     this.size = this.particlesManager.gap;
     this.vx = 0;
     this.vy = 0;
@@ -18,7 +19,9 @@ export class Particle {
   }
 
   draw(context) {
-    context.fillStyle = this.color;
+    context.fillStyle = this.particlesManager.velocityRendering
+      ? this.velocityColor
+      : this.color;
     context.fillRect(
       Math.floor(this.x),
       Math.floor(this.y),
@@ -52,7 +55,7 @@ export class Particle {
     this.force =
       this.distance == 0
         ? 0
-        : ((this.particlesManager.mouse.radius < this.distance ? 5 : 1) *
+        : ((this.distance > this.particlesManager.mouse.radius ? 0.2 : 1) *
             this.particlesManager.mouse.radius) /
           this.distance;
     if (this.force > 0.01) {
@@ -106,6 +109,7 @@ export class Particle {
           : this.vx * 0.7;
     }
     this.calculateforce();
+
     this.x += this.vx;
     this.y += this.vy;
   }
@@ -121,10 +125,10 @@ export class Particle {
       this.vy *
       (1 - this.particlesManager.inertiaVal / (100 * 30)) *
       (1 - this.particlesManager.ease / 100);
-    if (Math.abs(this.x - this.originX) < 0.01) {
+    if (Math.abs(this.x - this.originX) < 0.1) {
       this.x = this.originX;
     }
-    if (Math.abs(this.y - this.originY) < 0.01) {
+    if (Math.abs(this.y - this.originY) < 0.1) {
       this.y = this.originY;
     }
   }

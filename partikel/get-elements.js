@@ -5,6 +5,7 @@ export const changeResolutionBtn = document.getElementById(
   "change-resolution-btn"
 );
 export const resetPositionBtn = document.getElementById("reset-position-btn");
+export const styleSwitchBtn = document.getElementById("style-switch-btn");
 
 export const particlesAmtElement = document.getElementById("particles-amt");
 export const convergionSpeed = document.getElementById("convergion-speed");

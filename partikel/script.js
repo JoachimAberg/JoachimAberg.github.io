@@ -6,6 +6,7 @@ window.addEventListener("load", function () {
   const gravityBtn = getElements.gravityBtn;
   const changeImgBtn = getElements.changeImgBtn;
   const changeResolutionBtn = getElements.changeResolutionBtn;
+  const styleSwitchBtn = getElements.styleSwitchBtn;
   const resetPositionBtn = getElements.resetPositionBtn;
   const convergionSpeed = getElements.convergionSpeed;
   const mouseClickForce = getElements.mouseClickForce;
@@ -31,7 +32,7 @@ window.addEventListener("load", function () {
 
   canvas.addEventListener("mousedown", () => {
     particlesManager.mouse.radius = Math.max(
-      0.1,
+      0.5,
       particlesManager.mouse.radius
     );
     timeout = this.window.clearInterval(timeout);
@@ -47,7 +48,7 @@ window.addEventListener("load", function () {
     timeout = this.setInterval(() => {
       particlesManager.mouse.radius = Math.max(
         0,
-        particlesManager.mouse.radius * 0.9 - 0.5
+        particlesManager.mouse.radius * 0.95 - 0.05
       );
       globalForce = Math.max(1, globalForce - 1);
     }, 25);
@@ -61,6 +62,9 @@ window.addEventListener("load", function () {
 
   resetPositionBtn.addEventListener("click", () => {
     resetPosition();
+  });
+  styleSwitchBtn.addEventListener("click", () => {
+    changeStyle();
   });
   this.window.addEventListener("resize", () => {
     canvas.width = this.document.documentElement.clientWidth;
@@ -113,6 +117,8 @@ window.addEventListener("load", function () {
         bytUpplosning();
       } else if (e.code === "KeyV") {
         resetPosition();
+      } else if (e.code === "KeyB") {
+        changeStyle();
       }
     },
     false
@@ -129,6 +135,9 @@ window.addEventListener("load", function () {
   };
   const resetPosition = (e) => {
     particlesManager.resetPosition();
+  };
+  const changeStyle = () => {
+    particlesManager.changeStyle();
   };
   const bytUpplosning = (e) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -159,6 +168,7 @@ window.addEventListener("load", function () {
   let images = getElements.images;
   const timestampsArray = [];
   let timestamp;
+  let frameCounter = 1;
   const particlesManager = new ParticlesManager(
     canvas.width,
     canvas.height,
@@ -176,12 +186,17 @@ window.addEventListener("load", function () {
   particlesManager.init(ctx);
 
   function animate() {
+    if (frameCounter > 60) {
+      frameCounter = 1;
+    }
     updateFps();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (particlesManager) {
       particlesManager.draw(ctx);
+
       particlesManager.update();
     }
+    frameCounter++;
     requestAnimationFrame(animate);
   }
   animate();
