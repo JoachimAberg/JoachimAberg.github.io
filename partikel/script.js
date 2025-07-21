@@ -123,7 +123,8 @@ window.addEventListener("load", function () {
   };
   const bytBild = (e) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particlesManager.imageIndex = (imageIndex + 1) % 12;
+    particlesManager.imageIndex =
+      (particlesManager.imageIndex + 1) % images.length;
     particlesManager.init(ctx);
   };
   const resetPosition = (e) => {
