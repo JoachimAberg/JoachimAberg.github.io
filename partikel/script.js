@@ -73,8 +73,8 @@ window.addEventListener("load", function () {
     changeStyle();
   });
   this.window.addEventListener("resize", () => {
-    canvas.width = this.document.documentElement.clientWidth;
-    canvas.height = this.document.documentElement.clientHeight;
+    canvas.width = this.document.body.clientWidth;
+    canvas.height = this.document.body.clientHeight;
     particlesManager.width = canvas.width;
     particlesManager.height = canvas.height;
   });
@@ -175,8 +175,8 @@ window.addEventListener("load", function () {
   let timeout;
   let globalForce = 1;
   const ctx = canvas.getContext("2d");
-  canvas.width = this.document.documentElement.clientWidth;
-  canvas.height = this.document.documentElement.clientHeight;
+  canvas.width = this.document.body.clientWidth;
+  canvas.height = this.document.body.clientHeight;
   let imageIndex = 0;
   const upplosningar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 50];
   let resolutionIndex = 3;

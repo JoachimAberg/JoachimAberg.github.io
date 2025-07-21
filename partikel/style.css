@@ -1,5 +1,6 @@
-#canvas1 {
+#canvas {
   position: absolute;
+  overflow: hidden;
 }
 .controls {
   z-index: 100;
@@ -9,7 +10,7 @@
   flex-direction: column;
   height: 100%;
   position: absolute;
-  background: #888888;
+  background: #8888887a;
   padding: 0 0.5rem;
   > *:first-child {
     margin-top: 10px;
