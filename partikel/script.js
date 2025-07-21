@@ -10,6 +10,8 @@ window.addEventListener("load", function () {
   const resetPositionBtn = getElements.resetPositionBtn;
   const convergionSpeed = getElements.convergionSpeed;
   const mouseClickForce = getElements.mouseClickForce;
+  const mouseClickRadius = getElements.mouseClickRadius;
+  const mouseClickGrowth = getElements.mouseClickGrowth;
   const gravy = getElements.gravy;
   const gravx = getElements.gravx;
   const friction = getElements.friction;
@@ -18,6 +20,8 @@ window.addEventListener("load", function () {
   const bounceScatter = getElements.bounceScatter;
   const convergionSpeedLabel = getElements.convergionSpeedLabel;
   const mouseClickForceLabel = getElements.mouseClickForceLabel;
+  const mouseClickRadiusLabel = getElements.mouseClickRadiusLabel;
+  const mouseClickGrowthLabel = getElements.mouseClickGrowthLabel;
   const gravyLabel = getElements.gravyLabel;
   const gravxLabel = getElements.gravxLabel;
   const frictionLabel = getElements.frictionLabel;
@@ -32,14 +36,16 @@ window.addEventListener("load", function () {
 
   canvas.addEventListener("mousedown", () => {
     particlesManager.mouse.radius = Math.max(
-      0.5,
+      particlesManager.mouse.radiusDefault,
       particlesManager.mouse.radius
     );
     timeout = this.window.clearInterval(timeout);
     timeout = this.setInterval(() => {
       particlesManager.mouse.radius =
         particlesManager.mouse.radius +
-        (particlesManager.mouse.radius * clickForceVal) / 500;
+        (((particlesManager.mouse.radius * clickForceVal) / 500) *
+          particlesManager.mouse.growth) /
+          100;
       globalForce += (1 * clickForceVal) / 100;
     }, 25);
   });
@@ -101,6 +107,15 @@ window.addEventListener("load", function () {
   mouseClickForce.addEventListener("input", (e) => {
     particlesManager.clickForceVal = +e.target.value;
     mouseClickForceLabel.innerHTML = "Klick-kraft  (" + e.target.value + ")";
+  });
+  mouseClickRadius.addEventListener("input", (e) => {
+    particlesManager.mouse.radiusDefault = +e.target.value;
+    mouseClickRadiusLabel.innerHTML = "Klick-radie  (" + e.target.value + ")";
+  });
+  mouseClickGrowth.addEventListener("input", (e) => {
+    particlesManager.mouse.growth = +e.target.value;
+    mouseClickGrowthLabel.innerHTML =
+      "Klick-tillväxt  (" + e.target.value + ")";
   });
   inertia.addEventListener("input", (e) => {
     particlesManager.inertiaVal = +e.target.value;

@@ -55,9 +55,14 @@ export class Particle {
     this.force =
       this.distance == 0
         ? 0
-        : ((this.distance > this.particlesManager.mouse.radius ? 0.2 : 1) *
+        : ((((this.distance > this.particlesManager.mouse.radius ? 0.2 : 1) *
             this.particlesManager.mouse.radius) /
-          this.distance;
+            this.distance) *
+            this.particlesManager.clickForceVal) /
+          100;
+    if (this.force > 1) {
+      if (Math.random() > 0.9) this.force = this.force * 5;
+    }
     if (this.force > 0.01) {
       this.angle = Math.atan2(this.diffy, this.diffx);
       this.vx += -this.force * Math.cos(this.angle);

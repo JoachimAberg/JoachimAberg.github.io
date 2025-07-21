@@ -31,6 +31,7 @@
         <button id="style-switch-btn" class="">
           Ändra rendering-stil <kbd>B</kbd>
         </button>
+        <hr class="w80" />
         <div class="input-wrapper">
           <label for="convergion-speed" id="convergion-speed-label"
             >Grupperinghastighet (100)</label
@@ -45,6 +46,20 @@
             step="1"
           />
         </div>
+
+        <div class="input-wrapper">
+          <label for="inertia" id="inertia-label">Tröghet (10)</label>
+          <input
+            type="range"
+            name="inertia"
+            id="inertia"
+            value="10"
+            min="0"
+            max="100"
+            step="1"
+          />
+        </div>
+        <hr class="w80" />
         <div class="input-wrapper">
           <label for="mouse-click-force" id="mouse-click-force-label"
             >Klick-kraft (100)</label
@@ -59,6 +74,35 @@
             step="1"
           />
         </div>
+        <div class="input-wrapper">
+          <label for="mouse-click-radius" id="mouse-click-radius-label"
+            >Klick-radie (50)</label
+          >
+          <input
+            type="range"
+            name="mouse-click-radius"
+            id="mouse-click-radius"
+            value="50"
+            max="1000"
+            min="1"
+            step="1"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="mouse-click-growth" id="mouse-click-growth-label"
+            >Klick-tillväxt (0)</label
+          >
+          <input
+            type="range"
+            name="mouse-click-growth"
+            id="mouse-click-growth"
+            value="0"
+            max="100"
+            min="1"
+            step="1"
+          />
+        </div>
+        <hr class="w80" />
         <div class="input-wrapper">
           <label for="gravy" id="gravy-label">Gravitation y (100)</label>
           <input
@@ -83,24 +127,13 @@
             step="1"
           />
         </div>
+        <hr class="w80" />
         <div class="input-wrapper">
           <label for="friction" id="friction-label">Friktion (10)</label>
           <input
             type="range"
             name="friction"
             id="friction"
-            value="10"
-            min="0"
-            max="100"
-            step="1"
-          />
-        </div>
-        <div class="input-wrapper">
-          <label for="inertia" id="inertia-label">Tröghet (10)</label>
-          <input
-            type="range"
-            name="inertia"
-            id="inertia"
             value="10"
             min="0"
             max="100"
@@ -135,8 +168,13 @@
             step="1"
           />
         </div>
+        <hr class="w80" />
+
         <div id="particles-amt"></div>
-        <div><span>Fps:</span><span id="fps-counter"></span></div>
+        <div>
+          <span><strong>Fps:</strong></span
+          ><span id="fps-counter"></span>
+        </div>
       </div>
       <canvas id="canvas1"></canvas>
       <img src="images/semester-jimmie3.png" id="image1" />

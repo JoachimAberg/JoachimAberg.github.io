@@ -10,6 +10,8 @@ export const styleSwitchBtn = document.getElementById("style-switch-btn");
 export const particlesAmtElement = document.getElementById("particles-amt");
 export const convergionSpeed = document.getElementById("convergion-speed");
 export const mouseClickForce = document.getElementById("mouse-click-force");
+export const mouseClickRadius = document.getElementById("mouse-click-radius");
+export const mouseClickGrowth = document.getElementById("mouse-click-growth");
 export const gravy = document.getElementById("gravy");
 export const gravx = document.getElementById("gravx");
 export const friction = document.getElementById("friction");
@@ -21,6 +23,12 @@ export const convergionSpeedLabel = document.getElementById(
 );
 export const mouseClickForceLabel = document.getElementById(
   "mouse-click-force-label"
+);
+export const mouseClickRadiusLabel = document.getElementById(
+  "mouse-click-radius-label"
+);
+export const mouseClickGrowthLabel = document.getElementById(
+  "mouse-click-growth-label"
 );
 export const gravyLabel = document.getElementById("gravy-label");
 export const gravxLabel = document.getElementById("gravx-label");

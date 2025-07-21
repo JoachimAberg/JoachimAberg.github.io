@@ -34,8 +34,10 @@ export class ParticlesManager {
     this.velocityRendering = false;
     this.mouse = {
       radius: 0,
+      radiusDefault: 50,
       x: Number.MAX_SAFE_INTEGER,
       y: Number.MAX_SAFE_INTEGER,
+      growth: 0,
     };
     this.images = images;
     window.addEventListener("mousemove", (event) => {
