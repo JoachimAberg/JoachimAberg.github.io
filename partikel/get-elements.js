@@ -30,6 +30,8 @@ export const bounceScatterLabel = document.getElementById(
   "bounce-scatter-label"
 );
 export const fpsCounter = document.getElementById("fps-counter");
+export const desktop = document.getElementById("desktop");
+export const mobile = document.getElementById("mobile");
 export const images = [
   document.getElementById("image1"),
   document.getElementById("image2"),
