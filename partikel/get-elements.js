@@ -43,6 +43,7 @@ export const bounceScatterLabel = document.getElementById(
 export const fpsCounter = document.getElementById("fps-counter");
 export const desktop = document.getElementById("desktop");
 export const mobile = document.getElementById("mobile");
+export const valjAnnanBildInput = document.getElementById("valj-annan-bild-input");
 export const images = [
   document.getElementById("image1"),
   document.getElementById("image2"),
