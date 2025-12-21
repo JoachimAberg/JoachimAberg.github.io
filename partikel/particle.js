@@ -1,11 +1,11 @@
 export class Particle {
-  constructor(particlesManager, x, y, color) {
+  constructor(particlesManager, x, y, color32) {
     this.particlesManager = particlesManager;
     this.x = x;
     this.y = y;
     this.originX = Math.floor(x);
     this.originY = Math.floor(y);
-    this.color = color;
+    this.color32 = color32;
     this.velocityColor = "";
     this.size = this.particlesManager.gap;
     this.vx = 0;
@@ -22,12 +22,12 @@ export class Particle {
     context.fillStyle = this.particlesManager.velocityRendering
       ? this.velocityColor
       : this.color;
-    context.fillRect(
-      Math.floor(this.x),
-      Math.floor(this.y),
-      this.size,
-      this.size
-    );
+    // context.fillRect(
+    //   Math.floor(this.x),
+    //   Math.floor(this.y),
+    //   this.size,
+    //   this.size
+    // );
   }
   update() {
     if (this.gravityEnabled) {

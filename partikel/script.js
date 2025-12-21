@@ -104,9 +104,9 @@ window.addEventListener("load", function () {
   changeImgBtn.addEventListener("click", () => {
     bytBild();
   });
-  changeResolutionBtn.addEventListener("click", () => {
-    bytUpplosning();
-  });
+  // changeResolutionBtn.addEventListener("click", () => {
+  //   bytUpplosning();
+  // });
 
   resetPositionBtn.addEventListener("click", () => {
     resetPosition();
@@ -178,7 +178,7 @@ window.addEventListener("load", function () {
       } else if (e.code === "KeyX") {
         bytBild();
       } else if (e.code === "KeyC") {
-        bytUpplosning();
+        // bytUpplosning();
       } else if (e.code === "KeyV") {
         resetPosition();
       } else if (e.code === "KeyB") {
@@ -264,9 +264,12 @@ window.addEventListener("load", function () {
     updateFps();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (particlesManager) {
-      particlesManager.draw(ctx);
-
-      particlesManager.update();
+      if (!particlesManager.drawing) {
+        particlesManager.draw(ctx);
+      }
+      if (!particlesManager.updating) {
+        particlesManager.update();
+      }
     }
     frameCounter++;
     requestAnimationFrame(animate);
