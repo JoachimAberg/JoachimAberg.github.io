@@ -129,7 +129,8 @@ window.addEventListener("load", function () {
     var img = new Image();
     img.onload = () => {
       images.push(img);
-      particlesManager.initWithImg(ctx, img)
+      particlesManager.initWithImg(ctx, img);
+      particlesManager.imageIndex = imageIndex.length-1;
       valjAnnanBildInput.value=null;
     }
     img.src = url;   
