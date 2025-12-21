@@ -34,7 +34,48 @@ window.addEventListener("load", function () {
   gravityBtn.addEventListener("click", () => {
     toggleGravity();
   });
+  canvas.addEventListener("dragover", (e) => {
+    const fileItems = [...e.dataTransfer.items].filter(
+      (item) => item.kind === "file"
+    );
+    if (fileItems.length > 0) {
+      e.preventDefault();
+      if (fileItems.some((item) => item.type.startsWith("image/"))) {
+        e.dataTransfer.dropEffect = "copy";
+      } else {
+        e.dataTransfer.dropEffect = "none";
+      }
+    }
+    // prevent default to allow drop
+  });
+  window.addEventListener("dragover", (e) => {
+    const fileItems = [...e.dataTransfer.items].filter(
+      (item) => item.kind === "file"
+    );
+    if (fileItems.length > 0) {
+      e.preventDefault();
+      if (!e.target == canvas) {
+        e.dataTransfer.dropEffect = "none";
+      }
+    }
+  });
+  canvas.addEventListener("drop", (e) => {
+    console.log("drop", e);
+    e.preventDefault();
+    const files = [...e?.dataTransfer?.items]
+      .map((item) => item.getAsFile())
+      .filter((file) => file)
+      .forEach((f) => {
+        var url = URL.createObjectURL(f);
+        addImage(url);
+      });
+  });
 
+  window.addEventListener("drop", (e) => {
+    if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
+      e.preventDefault();
+    }
+  });
   canvas.addEventListener("mousedown", () => {
     particlesManager.mouse.radius = Math.max(
       particlesManager.mouse.radiusDefault,
@@ -122,19 +163,12 @@ window.addEventListener("load", function () {
     particlesManager.inertiaVal = +e.target.value;
     inertiaLabel.innerHTML = "Tröghet  (" + e.target.value + ")";
   });
-  valjAnnanBildInput.addEventListener("change", (e)=>{
+  valjAnnanBildInput.addEventListener("change", (e) => {
     // particlesManager.init()
     console.log(e);
     var url = URL.createObjectURL(e.target.files[0]);
-    var img = new Image();
-    img.onload = () => {
-      images.push(img);
-      particlesManager.initWithImg(ctx, img);
-      particlesManager.imageIndex = imageIndex.length-1;
-      valjAnnanBildInput.value=null;
-    }
-    img.src = url;   
-  })
+    addImage(url);
+  });
 
   window.addEventListener(
     "keypress",
@@ -153,7 +187,15 @@ window.addEventListener("load", function () {
     },
     false
   );
-
+  const addImage = (url) => {
+    var img = new Image();
+    img.onload = () => {
+      images.push(img);
+      particlesManager.initWithImg(ctx, img);
+      valjAnnanBildInput.value = null;
+    };
+    img.src = url;
+  };
   const toggleGravity = (e) => {
     particlesManager.toggleGravity();
   };
