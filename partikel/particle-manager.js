@@ -68,6 +68,33 @@ export class ParticlesManager {
       this.particlesArray.length + " partiklar";
   }
 
+  initWithImg(context, img) {
+    context.clearRect(0, 0, this.width, this.height);
+
+    this.x = this.width * 0.5 - img.width * 0.5;
+    this.y = this.height * 0.5 - img.height * 0.5;
+    context.drawImage(img, this.x, this.y);
+    //clamped array, r,g,b,a därav 4 på index
+    this.particlesArray = [];
+    const pixels = context.getImageData(0, 0, this.width, this.height).data;
+    for (let y = 0; y < this.height; y += this.gap) {
+      for (let x = 0; x < this.width; x += this.gap) {
+        const index = (y * this.width + x) * 4;
+        const red = pixels[index];
+        const green = pixels[index + 1];
+        const blue = pixels[index + 2];
+        const alpha = pixels[index + 3];
+        const color = "rgb(" + red + "," + green + "," + blue + ")";
+
+        if (alpha > 0) {
+          this.particlesArray.push(new Particle(this, x, y, color));
+        }
+      }
+    }
+    this.particlesAmtElement.innerHTML =
+      this.particlesArray.length + " partiklar";
+  }
+
   draw(context) {
     this.particlesArray.forEach((p) => p.draw(context));
     context.beginPath();

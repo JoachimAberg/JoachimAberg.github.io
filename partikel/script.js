@@ -23,7 +23,8 @@ window.addEventListener("load", function () {
   const inertiaLabel = getElements.inertiaLabel;
   const bounceLossLabel = getElements.bounceLossLabel;
   const bounceScatterLabel = getElements.bounceScatterLabel;
-
+  const valjAnnanBildInput = getElements.valjAnnanBildInput;
+  let img;
   //Setup eventlisteners
   gravityBtn.addEventListener("click", () => {
     toggleGravity();
@@ -102,6 +103,19 @@ window.addEventListener("load", function () {
     particlesManager.inertiaVal = +e.target.value;
     inertiaLabel.innerHTML = "Tröghet  (" + e.target.value + ")";
   });
+  valjAnnanBildInput.addEventListener("change", (e)=>{
+    // particlesManager.init()
+    console.log(e);
+    var url = URL.createObjectURL(e.target.files[0]);
+    var img = new Image();
+    img.onload = () => {
+      images.push(img);
+      particlesManager.initWithImg(ctx, img)
+      valjAnnanBildInput.value=null;
+    }
+    img.src = url;   
+  })
+
   window.addEventListener(
     "keypress",
     (e) => {
