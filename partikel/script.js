@@ -28,12 +28,54 @@ window.addEventListener("load", function () {
   const inertiaLabel = getElements.inertiaLabel;
   const bounceLossLabel = getElements.bounceLossLabel;
   const bounceScatterLabel = getElements.bounceScatterLabel;
-
+  const valjAnnanBildInput = getElements.valjAnnanBildInput;
+  let img;
   //Setup eventlisteners
   gravityBtn.addEventListener("click", () => {
     toggleGravity();
   });
+  canvas.addEventListener("dragover", (e) => {
+    const fileItems = [...e.dataTransfer.items].filter(
+      (item) => item.kind === "file"
+    );
+    if (fileItems.length > 0) {
+      e.preventDefault();
+      if (fileItems.some((item) => item.type.startsWith("image/"))) {
+        e.dataTransfer.dropEffect = "copy";
+      } else {
+        e.dataTransfer.dropEffect = "none";
+      }
+    }
+    // prevent default to allow drop
+  });
+  window.addEventListener("dragover", (e) => {
+    const fileItems = [...e.dataTransfer.items].filter(
+      (item) => item.kind === "file"
+    );
+    if (fileItems.length > 0) {
+      e.preventDefault();
+      if (!e.target == canvas) {
+        e.dataTransfer.dropEffect = "none";
+      }
+    }
+  });
+  canvas.addEventListener("drop", (e) => {
+    console.log("drop", e);
+    e.preventDefault();
+    const files = [...e?.dataTransfer?.items]
+      .map((item) => item.getAsFile())
+      .filter((file) => file)
+      .forEach((f) => {
+        var url = URL.createObjectURL(f);
+        addImage(url);
+      });
+  });
 
+  window.addEventListener("drop", (e) => {
+    if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
+      e.preventDefault();
+    }
+  });
   canvas.addEventListener("mousedown", () => {
     particlesManager.mouse.radius = Math.max(
       particlesManager.mouse.radiusDefault,
@@ -62,9 +104,9 @@ window.addEventListener("load", function () {
   changeImgBtn.addEventListener("click", () => {
     bytBild();
   });
-  changeResolutionBtn.addEventListener("click", () => {
-    bytUpplosning();
-  });
+  // changeResolutionBtn.addEventListener("click", () => {
+  //   bytUpplosning();
+  // });
 
   resetPositionBtn.addEventListener("click", () => {
     resetPosition();
@@ -121,6 +163,13 @@ window.addEventListener("load", function () {
     particlesManager.inertiaVal = +e.target.value;
     inertiaLabel.innerHTML = "Tröghet  (" + e.target.value + ")";
   });
+  valjAnnanBildInput.addEventListener("change", (e) => {
+    // particlesManager.init()
+    console.log(e);
+    var url = URL.createObjectURL(e.target.files[0]);
+    addImage(url);
+  });
+
   window.addEventListener(
     "keypress",
     (e) => {
@@ -129,7 +178,7 @@ window.addEventListener("load", function () {
       } else if (e.code === "KeyX") {
         bytBild();
       } else if (e.code === "KeyC") {
-        bytUpplosning();
+        // bytUpplosning();
       } else if (e.code === "KeyV") {
         resetPosition();
       } else if (e.code === "KeyB") {
@@ -138,7 +187,15 @@ window.addEventListener("load", function () {
     },
     false
   );
-
+  const addImage = (url) => {
+    var img = new Image();
+    img.onload = () => {
+      images.push(img);
+      particlesManager.initWithImg(ctx, img);
+      valjAnnanBildInput.value = null;
+    };
+    img.src = url;
+  };
   const toggleGravity = (e) => {
     particlesManager.toggleGravity();
   };
@@ -207,9 +264,12 @@ window.addEventListener("load", function () {
     updateFps();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (particlesManager) {
-      particlesManager.draw(ctx);
-
-      particlesManager.update();
+      if (!particlesManager.drawing) {
+        particlesManager.draw(ctx);
+      }
+      if (!particlesManager.updating) {
+        particlesManager.update();
+      }
     }
     frameCounter++;
     requestAnimationFrame(animate);
